@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 72" role="img" aria-label="Minds Nova">
+  <defs>
+    <linearGradient id="mn-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4338ca"/>
+      <stop offset=".55" stop-color="#6d5cf0"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+    <radialGradient id="mn-glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mn-word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a8a4ff"/>
+      <stop offset="1" stop-color="#c4b5fd"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(4 4)">
+    <rect width="64" height="64" rx="16" fill="url(#mn-bg)"/>
+    <circle cx="32" cy="32" r="21" fill="url(#mn-glow)"/>
+    <ellipse cx="32" cy="32" rx="24" ry="9" fill="none" stroke="#ffffff" stroke-opacity=".5" stroke-width="2.2" transform="rotate(-28 32 32)"/>
+    <path d="M32 11c1.6 13.4 6.6 18.4 20 21-13.4 2.6-18.4 7.6-20 21-1.6-13.4-6.6-18.4-20-21 13.4-2.6 18.4-7.6 20-21z" fill="#ffffff"/>
+    <path d="M49 9.5c.5 3.6 1.9 5 5.5 5.5-3.6.5-5 1.9-5.5 5.5-.5-3.6-1.9-5-5.5-5.5 3.6-.5 5-1.9 5.5-5.5z" fill="#fcd34d"/>
+    <circle cx="10.6" cy="39.9" r="2.6" fill="#fcd34d"/>
+  </g>
+  <text x="84" y="45" font-family="Inter, 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="31" font-weight="800" letter-spacing="-1">
+    <tspan fill="#ffffff">Minds</tspan><tspan dx="7" fill="url(#mn-word)">Nova</tspan>
+  </text>
+  <text x="85" y="62" font-family="Inter, 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="9.5" font-weight="700" letter-spacing="1.6" fill="#8f9bbd">CAREER ACCOMPLISHMENT HUB</text>
+</svg>

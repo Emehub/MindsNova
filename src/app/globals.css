@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+/*
+ * Minds Nova design tokens, matching the Minds Nova logo and site:
+ * violet gradient #4338CA -> #6D5CF0 -> #A78BFA with small gold accents (#FCD34D).
+ *
+ * accent  = Minds Nova violet (#6D5CF0). White text on it is 4.8:1, so
+ *           buttons and badges on accent always use white text.
+ * brand   = deep indigo (#4F46E5 and darker) for links, headings and dark sections.
+ * gold    = small highlights only (sparkles, badges on dark), never body text on white.
+ */
+@theme {
+  --color-accent: #6d5cf0;
+  --color-accent-50: #f5f4ff;
+  --color-accent-100: #efedff;
+  --color-accent-200: #ddd6fe;
+  --color-accent-400: #a78bfa;
+  --color-brand: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #1b1a4b;
+  --color-brand-950: #121136;
+  --color-gold: #fcd34d;
+  --color-ink: #11152e;
+  --color-muted: #5f6787;
+  --color-line: #e6e6f2;
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  /* Headings are semibold, not heavy: a calm, modern look. */
+  --font-weight-extrabold: 600;
+
+  --grad-brand: linear-gradient(135deg, #4338ca 0%, #6d5cf0 55%, #8b5cf6 100%);
+  --grad-text: linear-gradient(120deg, #5b5ce2 0%, #8b5cf6 55%, #c084fc 100%);
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(17 21 46 / 0.04), 0 8px 24px -10px rgb(17 21 46 / 0.12);
+  --shadow-soft: 0 1px 2px rgb(17 21 46 / 0.04), 0 12px 32px -12px rgb(40 36 120 / 0.18);
+  --shadow-lift: 0 2px 6px rgb(17 21 46 / 0.05), 0 30px 60px -20px rgb(40 36 120 / 0.3);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display font-semibold text-ink;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-accent-200); color: var(--color-brand-900); }
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+
+@utility btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-7 py-3 text-base font-semibold
+      transition-[background-color,color,box-shadow,transform] duration-200 ease-out
+      active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60;
+}
+
+@utility link { @apply font-semibold text-brand underline decoration-accent/50 decoration-2 underline-offset-4 hover:decoration-brand; }
+
+@utility card { @apply rounded-[var(--radius-card)] border border-line/70 bg-white shadow-[var(--shadow-card)]; }
+
+/* Gradient text, as in the Minds Nova wordmark. */
+.text-gradient { background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+  .section { @apply py-12 sm:py-14 lg:py-16; }
+
+  /* Small uppercase label above headings. */
+  .eyebrow { @apply inline-block text-sm font-semibold uppercase tracking-[0.14em] text-accent; }
+  /* Rounded "pill" label, used at the top of page heroes. */
+  .eyebrow-pill { @apply inline-flex items-center rounded-full bg-accent-100 px-4 py-1.5 text-[0.95rem] font-medium text-brand-700; }
+  .icon-circle { @apply grid size-20 shrink-0 place-items-center rounded-full bg-accent text-white shadow-soft transition-transform duration-500; }
+  .group:hover .icon-circle { transform: translateY(-6px) rotate(-8deg) scale(1.06); }
+  .lead { @apply text-lg text-muted sm:text-xl; line-height: 1.6; }
+
+  /* Solid violet fill: white text on #6D5CF0 is 4.8:1. */
+  .btn-primary { @apply btn bg-accent text-white hover:bg-brand-700; }
+  .btn-secondary { @apply btn bg-brand text-white hover:bg-brand-700; }
+  .btn-outline { @apply btn border-2 border-accent-200 bg-white text-brand-700 hover:border-accent hover:bg-accent-50; }
+  .btn-sm { @apply min-h-9 px-5 py-1.5 text-sm; }
+
+  .link-arrow { @apply inline-flex items-center gap-1.5 font-semibold text-accent hover:text-brand-700; }
+  .link-arrow svg { @apply transition-transform duration-200; }
+  .link-arrow:hover svg { transform: translateX(3px); }
+
+  .card-hover { @apply card transition-[box-shadow,transform,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:border-accent-200 hover:shadow-lift; }
+  /* Photos inside cards zoom gently on hover. */
+  .card-hover img, .card-hover [role="img"] { transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+  .card-hover:hover img, .card-hover:hover [role="img"] { transform: scale(1.06); }
+  .card { transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; }
+  li.card:hover, div.card.reveal:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full bg-accent-100 px-3 py-1 text-xs font-semibold text-brand-800; }
+  .icon-tile { @apply grid size-12 shrink-0 place-items-center rounded-2xl bg-accent-100 text-brand; }
+
+  /* Forms */
+  .label { @apply mb-1.5 block text-sm font-semibold text-ink; }
+  .hint { @apply mt-1 text-sm text-muted; }
+  .input {
+    @apply block w-full rounded-xl border border-line bg-white px-4 py-2.5 text-base text-ink shadow-[inset_0_1px_2px_rgb(4_61_67/0.04)]
+      transition-[border-color,box-shadow] placeholder:text-muted/70
+      focus:border-brand focus:outline-none focus:ring-4 focus:ring-accent/20;
+  }
+  .input[aria-invalid="true"] { @apply border-red-600 focus:ring-red-600/15; }
+  .field-error { @apply mt-1.5 flex items-start gap-1.5 text-sm font-medium text-red-700; }
+
+  /* Long-form text from Markdown */
+  .prose-mn { @apply max-w-none text-[1.0625rem] leading-relaxed text-ink; }
+  .prose-mn > * + * { @apply mt-5; }
+  .prose-mn h2 { @apply mt-10 text-2xl; }
+  .prose-mn h3 { @apply mt-8 text-xl; }
+  .prose-mn a { @apply link; }
+  .prose-mn ul { @apply list-disc space-y-2 pl-6 marker:text-accent; }
+  .prose-mn ol { @apply list-decimal space-y-2 pl-6 marker:text-brand; }
+  .prose-mn blockquote { @apply border-l-4 border-accent bg-accent-50 px-5 py-3 text-brand-900; }
+  .prose-mn code { @apply rounded bg-accent-50 px-1.5 py-0.5 font-mono text-[0.9em] text-brand-800; }
+  .prose-mn pre { @apply overflow-x-auto rounded-xl bg-brand-900 p-4 text-sm text-white; }
+  .prose-mn pre code { @apply bg-transparent p-0 text-white; }
+  .prose-mn img { @apply rounded-xl; }
+  .prose-mn hr { @apply border-line; }
+  .prose-mn table { @apply w-full border-collapse text-left text-sm; }
+  .prose-mn th, .prose-mn td { @apply border border-line px-3 py-2; }
+}
+
+/* Header gains a soft shadow once the page scrolls. */
+header { transition: box-shadow 0.3s ease, background-color 0.3s ease; }
+html[data-scrolled] header { box-shadow: 0 8px 30px -12px rgb(40 36 120 / 0.25); }
+
+/* Scrolling program ticker. */
+.marquee { overflow: hidden; }
+.marquee-track { display: flex; width: max-content; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrance animation for content as it scrolls into view. */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  /* Hero entrance on page load. */
+  .animate-in { animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .animate-in-scale { animation: fade-scale 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-blob { animation: blob 10s ease-in-out infinite; }
+  .kenburns { animation: kenburns 9s ease-out both; }
+  .text-gradient-anim { background: linear-gradient(110deg, #6d5cf0, #8b5cf6, #c084fc, #6d5cf0); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both, shimmer 7s linear infinite; }
+  .marquee-track { animation: marquee 32s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+}
+.text-gradient-anim { color: var(--color-accent); }
+
+@keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes fade-scale { from { opacity: 0; transform: scale(0.94) translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes blob { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(14px, -12px) scale(1.15); } }
+@keyframes kenburns { from { transform: scale(1.12); } to { transform: scale(1); } }
+@keyframes shimmer { to { background-position: -250% 0; } }
+@keyframes marquee { to { transform: translateX(-50%); } }
