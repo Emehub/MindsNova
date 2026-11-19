@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
   // PGlite ships WASM and must not be bundled.
   serverExternalPackages: ["@electric-sql/pglite", "pg", "bcryptjs"],
   poweredByHeader: false,
+  // The server applies ./drizzle migrations on start, so ship them with every function (needed on Vercel).
+  outputFileTracingIncludes: {
+    "/": ["./drizzle/**/*"],
+    "/**/*": ["./drizzle/**/*"],
+  },
   experimental: {
     serverActions: { bodySizeLimit: "10mb" },
   },

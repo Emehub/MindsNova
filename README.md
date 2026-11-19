@@ -40,11 +40,16 @@ In development the database is **PGlite**, a full PostgreSQL engine stored in `.
    npm run db:setup     # migrations, starting content and first admin
    npm start
    ```
-4. **Uploads:** files uploaded in the dashboard are stored in `UPLOAD_DIR`. Use a persistent disk or volume. On serverless hosts without a disk, replace `src/lib/uploads.ts` with object storage (S3, Cloudflare R2 or similar); nothing else needs to change.
+4. **Uploads:** files uploaded in the dashboard are stored in the database (`media_blobs` table), so no persistent disk is needed.
 5. **HTTPS** is required in production (session cookies are `Secure`).
 6. After first sign-in, change the admin password under **Account**, then remove `ADMIN_PASSWORD` from the environment.
 
-Hosts that work well: any Node.js host with a persistent disk (Render, Railway, Fly.io, a VPS), or Vercel plus object storage for uploads.
+### Deploying on Vercel (recommended)
+
+1. On vercel.com, **Add New → Project** and import this GitHub repository. Framework: Next.js (detected).
+2. In the project, open **Storage → Create Database → Neon (Postgres)** and connect it. This sets `DATABASE_URL` automatically.
+3. Under **Settings → Environment Variables** add `NEXT_PUBLIC_SITE_URL` (your site address), `ADMIN_EMAIL` and `ADMIN_PASSWORD`, plus the optional email (`SMTP_*`) settings.
+4. **Deploy.** On first start the site creates its tables, loads the six programs and creates the admin account. Every push to `main` redeploys automatically.
 
 ---
 

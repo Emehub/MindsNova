@@ -25,7 +25,8 @@ function create(): DB {
     const { Pool } = require("pg") as typeof import("pg");
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { drizzle } = require("drizzle-orm/node-postgres") as typeof import("drizzle-orm/node-postgres");
-    const pool = new Pool({ connectionString: url, max: 10 });
+    // Kept small: on serverless hosts every instance opens its own pool.
+    const pool = new Pool({ connectionString: url, max: Number(process.env.DATABASE_POOL_MAX) || 5 });
     holder.kind = "postgres";
     holder.close = () => pool.end();
     return drizzle(pool, { schema });

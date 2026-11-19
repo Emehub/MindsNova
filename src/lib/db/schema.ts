@@ -21,7 +21,14 @@ import {
   timestamp,
   uniqueIndex,
   date,
+  customType,
 } from "drizzle-orm/pg-core";
+
+/** Raw binary data (PostgreSQL bytea). */
+const bytea = customType<{ data: Buffer; driverData: Buffer | Uint8Array }>({
+  dataType: () => "bytea",
+  fromDriver: (v) => (Buffer.isBuffer(v) ? v : Buffer.from(v)),
+});
 
 const createdAt = () => timestamp("created_at", { withTimezone: true }).defaultNow().notNull();
 const updatedAt = () => timestamp("updated_at", { withTimezone: true }).defaultNow().notNull();
@@ -71,6 +78,17 @@ export const media = pgTable("media", {
   size: integer("size").notNull(),
   alt: text("alt"),
   uploadedBy: integer("uploaded_by").references(() => users.id, { onDelete: "set null" }),
+  createdAt: createdAt(),
+});
+
+/**
+ * File contents for uploads, kept in the database so they survive on hosts
+ * with temporary disks (such as Vercel). Kept apart from `media` so listing
+ * the library never loads file bytes.
+ */
+export const mediaBlobs = pgTable("media_blobs", {
+  storedName: text("stored_name").primaryKey(),
+  data: bytea("data").notNull(),
   createdAt: createdAt(),
 });
 

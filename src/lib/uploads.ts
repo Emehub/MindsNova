@@ -1,6 +1,8 @@
 import "server-only";
-import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
+import { readFile, unlink } from "node:fs/promises";
 import path from "node:path";
+import { eq } from "drizzle-orm";
+import { db, schema } from "./db";
 import { randomToken } from "./utils";
 
 export const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
@@ -20,24 +22,30 @@ export function sniffType(buf: Buffer): { mime: string; ext: string } | null {
   return null;
 }
 
+/**
+ * Uploads are stored in the database (media_blobs), so they persist on
+ * hosts whose disks are temporary. Files saved to disk by older versions
+ * are still served as a fallback.
+ */
 export async function storeFile(buf: Buffer) {
   const type = sniffType(buf);
   if (!type) throw new Error("Only PNG, JPEG, GIF, WebP images and PDF documents are allowed.");
   if (buf.length > MAX_UPLOAD_BYTES) throw new Error("Files must be 8 MB or smaller.");
-  const dir = uploadDir();
-  await mkdir(dir, { recursive: true });
   const storedName = `${Date.now()}-${randomToken(9)}.${type.ext}`;
-  await writeFile(path.join(dir, storedName), buf);
+  await db.insert(schema.mediaBlobs).values({ storedName, data: buf });
   return { storedName, mime: type.mime };
 }
 
-export async function readStored(storedName: string) {
+export async function readStored(storedName: string): Promise<Buffer> {
   if (!/^[\w.-]+$/.test(storedName)) throw new Error("bad name");
+  const row = await db.query.mediaBlobs.findFirst({ where: eq(schema.mediaBlobs.storedName, storedName) });
+  if (row) return row.data;
   return readFile(path.join(uploadDir(), storedName));
 }
 
 export async function deleteStored(storedName: string) {
   if (!/^[\w.-]+$/.test(storedName)) return;
+  await db.delete(schema.mediaBlobs).where(eq(schema.mediaBlobs.storedName, storedName));
   await unlink(path.join(uploadDir(), storedName)).catch(() => {});
 }
 
