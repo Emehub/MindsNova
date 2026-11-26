@@ -10,7 +10,7 @@ const unsplash = (id: string, w = 1200, h?: number) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=faces&q=75&w=${w}${h ? `&h=${h}` : ""}`;
 
 export const PHOTOS = {
-  hero: { src: unsplash("1655720348590-c739c860beed", 1000, 1050), alt: "Young people sitting together outdoors, working on laptops" },
+  hero: { src: unsplash("1655720348590-c739c860beed", 1200, 1000), alt: "Young people sitting together outdoors, working on laptops" },
   about: { src: unsplash("1655720357872-ce227e4164ba", 1200, 900), alt: "Three young women talking together around a laptop" },
   speaker: { src: unsplash("1624499843552-7347d9f6d285", 1200, 900), alt: "A woman speaking to an audience with a microphone" },
 } satisfies Record<string, Photo>;
@@ -38,9 +38,9 @@ export const INVOLVE_PHOTOS = {
 /** Photos that rotate in the homepage hero (portrait crops). */
 export const HERO_SLIDES: Photo[] = [
   PHOTOS.hero,
-  { src: unsplash("1653669486397-b802144ae64a", 1000, 1050), alt: "A young professional woman standing by her desk with a laptop" },
-  { src: unsplash("1645620766046-b129a9c5f658", 1000, 1050), alt: "A young man and woman learning together on a laptop" },
-  { src: unsplash("1573497701240-345a300b8d36", 1000, 1050), alt: "Young professionals in a meeting around a table" },
+  { src: unsplash("1653669486397-b802144ae64a", 1200, 1000), alt: "A young professional woman standing by her desk with a laptop" },
+  { src: unsplash("1645620766046-b129a9c5f658", 1200, 1000), alt: "A young man and woman learning together on a laptop" },
+  { src: unsplash("1573497701240-345a300b8d36", 1200, 1000), alt: "Young professionals in a meeting around a table" },
 ];
 
 const CATEGORY_PHOTOS: Record<string, Photo> = {

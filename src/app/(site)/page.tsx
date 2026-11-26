@@ -79,7 +79,7 @@ export default async function HomePage() {
       {/* ---------------- Hero ---------------- */}
       {/* On desktop the hero is exactly one screen tall, so the headline, buttons and photo are all visible on arrival. */}
       <section className="relative overflow-hidden bg-[radial-gradient(60%_80%_at_0%_10%,var(--color-accent-100),transparent_70%),radial-gradient(45%_60%_at_100%_100%,#fff7e0,transparent_70%)] lg:flex lg:min-h-svh lg:items-center">
-        <div className="container-page grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:py-6">
+        <div className="container-page grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1fr_1fr] lg:gap-8 lg:py-6">
           <div>
             <p className="eyebrow-pill animate-in">Learn. Connect. Get job-ready.</p>
             <h1 className="mt-5 text-[2.45rem] font-semibold leading-[1.1] sm:text-6xl lg:mt-4 lg:text-[clamp(2.75rem,min(4.4vw,7.4svh),4.25rem)] lg:leading-[1.06]">
@@ -96,12 +96,12 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-lg animate-in-scale [animation-delay:200ms] lg:mr-0 lg:w-auto lg:max-w-none lg:justify-self-end">
+          <div className="relative mx-auto w-full max-w-lg animate-in-scale [animation-delay:200ms] lg:max-w-none lg:justify-self-stretch">
             <div className="absolute -left-6 -top-6 size-32 rounded-full bg-accent/15 blur-2xl animate-blob" aria-hidden="true" />
             <div className="absolute -bottom-10 -right-4 size-40 rounded-full bg-amber-200/40 blur-2xl animate-blob [animation-delay:-4s]" aria-hidden="true" />
             <HeroSlideshow
               slides={home.heroImage ? [{ src: home.heroImage, alt: home.heroImageAlt || "" }, ...HERO_SLIDES] : HERO_SLIDES}
-              className="aspect-[4/5] w-full rounded-3xl rounded-bl-[7rem] shadow-lift sm:rounded-bl-[9rem] lg:aspect-square lg:h-[min(36rem,calc(100svh-var(--header-space)-5.5rem))] lg:w-auto lg:rounded-bl-[7rem]"
+              className="aspect-[4/5] w-full rounded-3xl rounded-bl-[7rem] shadow-lift sm:rounded-bl-[9rem] lg:aspect-auto lg:h-[min(38rem,calc(100svh-var(--header-space)-4.5rem))] lg:w-full lg:rounded-bl-[7rem]"
             />
             <figure className="absolute -bottom-8 right-0 z-10 max-w-[19rem] animate-float rounded-2xl bg-white p-5 shadow-lift sm:-right-6 sm:p-6 lg:-bottom-6 lg:max-w-[16.5rem] lg:p-5">
               <div className="flex gap-3">
