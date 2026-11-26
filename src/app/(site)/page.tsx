@@ -77,32 +77,33 @@ export default async function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
 
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden bg-[radial-gradient(60%_80%_at_0%_10%,var(--color-accent-100),transparent_70%),radial-gradient(45%_60%_at_100%_100%,#fff7e0,transparent_70%)]">
-        <div className="container-page grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:py-16">
+      {/* On desktop the hero is exactly one screen tall, so the headline, buttons and photo are all visible on arrival. */}
+      <section className="relative overflow-hidden bg-[radial-gradient(60%_80%_at_0%_10%,var(--color-accent-100),transparent_70%),radial-gradient(45%_60%_at_100%_100%,#fff7e0,transparent_70%)] lg:flex lg:min-h-svh lg:items-center">
+        <div className="container-page grid items-center gap-12 py-10 sm:py-14 lg:grid-cols-[1.15fr_1fr] lg:gap-12 lg:py-6">
           <div>
             <p className="eyebrow-pill animate-in">Learn. Connect. Get job-ready.</p>
-            <h1 className="mt-5 text-[2.7rem] font-semibold leading-[1.1] sm:text-6xl lg:text-[4rem]">
+            <h1 className="mt-5 text-[2.45rem] font-semibold leading-[1.1] sm:text-6xl lg:mt-4 lg:text-[clamp(2.75rem,min(4.4vw,7.4svh),4.25rem)] lg:leading-[1.06]">
               <span className="block animate-in [animation-delay:100ms]">Empowering minds.</span>
               <span className="block animate-in [animation-delay:220ms]">Building skills.</span>
               <span className="block animate-in text-gradient-anim [animation-delay:340ms]">Shaping the future.</span>
             </h1>
-            <p className="mt-5 max-w-xl animate-in text-lg leading-relaxed text-muted [animation-delay:460ms] sm:text-xl">
+            <p className="mt-5 max-w-xl animate-in text-[1.05rem] leading-relaxed text-muted [animation-delay:460ms] sm:text-xl lg:mt-4 lg:text-[clamp(1rem,2.4svh,1.25rem)]">
               MindsNova Hub is a social enterprise in Accra, Ghana, helping young people, particularly girls and young women, build the confidence, digital skills and connections to step into the world of work, through talks, mentorship and practical programs led by people already in the field.
             </p>
-            <div className="mt-8 flex animate-in flex-col gap-3 [animation-delay:580ms] sm:flex-row">
+            <div className="mt-8 flex animate-in flex-col gap-3 [animation-delay:580ms] sm:flex-row lg:mt-7">
               <Link href="/programs" className="btn-primary group">Explore Programs <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link>
               <Link href="/get-involved#partner" className="btn-outline">Partner With Us</Link>
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-lg animate-in-scale [animation-delay:200ms] lg:mr-0">
+          <div className="relative mx-auto w-full max-w-lg animate-in-scale [animation-delay:200ms] lg:mr-0 lg:w-auto lg:max-w-none lg:justify-self-end">
             <div className="absolute -left-6 -top-6 size-32 rounded-full bg-accent/15 blur-2xl animate-blob" aria-hidden="true" />
             <div className="absolute -bottom-10 -right-4 size-40 rounded-full bg-amber-200/40 blur-2xl animate-blob [animation-delay:-4s]" aria-hidden="true" />
             <HeroSlideshow
               slides={home.heroImage ? [{ src: home.heroImage, alt: home.heroImageAlt || "" }, ...HERO_SLIDES] : HERO_SLIDES}
-              className="aspect-[4/5] w-full rounded-3xl rounded-bl-[7rem] shadow-lift sm:rounded-bl-[9rem]"
+              className="aspect-[4/5] w-full rounded-3xl rounded-bl-[7rem] shadow-lift sm:rounded-bl-[9rem] lg:h-[min(34rem,calc(100svh-var(--header-space)-5.5rem))] lg:w-auto lg:rounded-bl-[7rem]"
             />
-            <figure className="absolute -bottom-8 right-0 z-10 max-w-[19rem] animate-float rounded-2xl bg-white p-5 shadow-lift sm:-right-6 sm:p-6">
+            <figure className="absolute -bottom-8 right-0 z-10 max-w-[19rem] animate-float rounded-2xl bg-white p-5 shadow-lift sm:-right-6 sm:p-6 lg:-bottom-6 lg:max-w-[16.5rem] lg:p-5">
               <div className="flex gap-3">
                 <Quote className="size-7 shrink-0 -scale-x-100 text-accent" aria-hidden="true" />
                 <blockquote className="font-medium leading-snug text-ink">
