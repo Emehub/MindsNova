@@ -72,7 +72,7 @@ export const DEFAULT_SETTINGS: SettingsMap = {
   },
   about: {
     whoWeAre:
-      "MindsNova Hub is a registered social enterprise based in Accra, Ghana, working in digital skills and career development. We help young people, particularly girls and young women, build the confidence, digital skills and connections to step into the world of work.\n\nWe also bring experienced professionals to speak with our young people about the job market, the skills employers want and how to navigate the workplace, so they leave not only skilled but ready for the world of work.",
+      "MindsNova Hub is a registered social enterprise based in Accra, Ghana, with an African and global outlook. We work in digital skills and career development.\n\nWe help young people, particularly girls and young women, build the confidence, digital skills and connections to step into the world of work.\n\nWe also bring experienced professionals to speak with our young people about the job market, the skills employers want and how to navigate the workplace, so they leave not only skilled but ready to start their careers.",
     vision:
       "To build an inclusive future where young people, particularly girls and young women, have the digital skills, confidence and connections to secure meaningful work and grow in their careers.",
     mission:

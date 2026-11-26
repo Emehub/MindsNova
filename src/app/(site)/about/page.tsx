@@ -21,7 +21,7 @@ export default async function AboutPage() {
       <PageHero image={PAGE_PHOTOS.about}
         eyebrow="About us"
         title="Building an ecosystem where young minds learn, create and lead."
-        intro="MindsNova Hub is a registered social enterprise based in Accra, Ghana, with an African and global outlook. We help young people build the confidence, digital skills and connections to step into the world of work."
+        intro="Practical digital skills, mentorship and career guidance for young people in Ghana and beyond, led by people already in the field."
       />
 
       {/* Who we are */}
