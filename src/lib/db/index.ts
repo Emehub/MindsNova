@@ -35,7 +35,9 @@ function create(): DB {
   const { PGlite } = require("@electric-sql/pglite") as typeof import("@electric-sql/pglite");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { drizzle } = require("drizzle-orm/pglite") as typeof import("drizzle-orm/pglite");
-  const dir = path.resolve(process.cwd(), ".data", "pglite");
+  // On Vercel without DATABASE_URL ("website only"), use the writable temporary
+  // folder. It is rebuilt with the starting content on each cold start.
+  const dir = process.env.VERCEL ? "/tmp/pglite" : path.resolve(process.cwd(), ".data", "pglite");
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   (require("node:fs") as typeof import("node:fs")).mkdirSync(dir, { recursive: true });
   const client = new PGlite(dir);

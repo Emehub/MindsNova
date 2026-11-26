@@ -25,6 +25,38 @@ const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export type SubmitResult = Record<string, unknown> & { ok: boolean };
 
+/**
+ * "Website only" mode: set at build time when the site is hosted without a
+ * permanent database (see next.config.ts). Submissions could not be kept, so
+ * forms are replaced by contact details instead of silently losing data.
+ */
+const FORMS_OFFLINE = process.env.NEXT_PUBLIC_FORMS_OFFLINE === "1";
+const PUBLIC_EMAIL = "minds.novahub@gmail.com";
+const PUBLIC_PHONE = "+233 55 218 4599";
+
+function FormsOfflineNotice({ compact }: { compact: boolean }) {
+  if (compact) {
+    return (
+      <p className="text-sm opacity-80">
+        Online sign-up is opening soon. Email{" "}
+        <a href={`mailto:${PUBLIC_EMAIL}`} className="font-semibold underline underline-offset-4">{PUBLIC_EMAIL}</a> to join our list.
+      </p>
+    );
+  }
+  return (
+    <div className="rounded-2xl border border-accent-200 bg-accent-50 p-6 text-ink">
+      <p className="text-lg font-semibold">Online forms are opening soon.</p>
+      <p className="mt-2 text-muted">
+        In the meantime, we would love to hear from you directly. Send us your name, phone number and what you are interested in, and our team will get back to you.
+      </p>
+      <div className="mt-5 flex flex-wrap gap-3">
+        <a href={`mailto:${PUBLIC_EMAIL}`} className="btn-primary btn-sm">Email {PUBLIC_EMAIL}</a>
+        <a href={`tel:${PUBLIC_PHONE.replace(/\s/g, "")}`} className="btn-outline btn-sm">Call {PUBLIC_PHONE}</a>
+      </div>
+    </div>
+  );
+}
+
 export function FormShell({
   endpoint,
   children,
@@ -102,6 +134,8 @@ export function FormShell({
       setPending(false);
     }
   }
+
+  if (FORMS_OFFLINE) return <FormsOfflineNotice compact={compact} />;
 
   if (result) {
     return (

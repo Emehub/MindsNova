@@ -28,6 +28,10 @@ const invalid = (errors: Record<string, string>) =>
 
 export async function POST(req: Request, ctx: { params: Promise<{ form: string }> }) {
   const { form } = await ctx.params;
+  // Website-only hosting (no permanent database): never accept data we cannot keep.
+  if (process.env.NEXT_PUBLIC_FORMS_OFFLINE === "1") {
+    return fail("Online forms are opening soon. Please email minds.novahub@gmail.com or call +233 55 218 4599.", 503);
+  }
   let body: Body;
   try {
     body = (await req.json()) as Body;
