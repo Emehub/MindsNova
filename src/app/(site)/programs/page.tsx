@@ -25,7 +25,7 @@ export default async function ProgramsPage() {
       />
 
       {/* Category jump links */}
-      <nav aria-label="Program categories" className="sticky top-[4.5rem] z-30 border-b border-line bg-white/95 backdrop-blur">
+      <nav aria-label="Program categories" className="sticky top-[calc(var(--header-space)+0.5rem)] z-30 border-b border-line bg-white/95 backdrop-blur">
         <ul className="container-page flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
           {PROGRAM_CATEGORIES.map((c) => (
             <li key={c.slug} className="shrink-0">

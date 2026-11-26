@@ -98,13 +98,13 @@ export function SiteFooter({ contact, social }: { contact: ContactSettings; soci
       </div>
 
       <div className="border-t border-white/10">
-        <div className="container-page flex flex-col items-center gap-3 py-7 text-center text-sm text-white/60">
-          <ul className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+        <div className="container-page flex flex-col items-center gap-4 py-6 text-center text-sm text-white/60 md:flex-row md:justify-between md:text-left">
+          <p>© {year} {SITE.name}. All rights reserved.</p>
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {LEGAL_NAV.map((l) => (
-              <li key={l.href}><Link href={l.href} className="hover:text-white">{l.label}</Link></li>
+              <li key={l.href}><Link href={l.href} className="transition-colors hover:text-white">{l.label}</Link></li>
             ))}
           </ul>
-          <p>© {year} {SITE.name}. All rights reserved. Registered business in Ghana, No. {SITE.legal.registrationNo}.</p>
         </div>
       </div>
     </footer>

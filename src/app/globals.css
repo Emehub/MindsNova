@@ -143,9 +143,19 @@
   .prose-mn th, .prose-mn td { @apply border border-line px-3 py-2; }
 }
 
-/* Header gains a soft shadow once the page scrolls. */
-header { transition: box-shadow 0.3s ease, background-color 0.3s ease; }
-html[data-scrolled] header { box-shadow: 0 8px 30px -12px rgb(40 36 120 / 0.25); }
+/*
+ * Floating header: it overlaps the top of the page, so the first block of
+ * every page reserves its height with a transparent top border. The block's
+ * own background shows through, so there is no white strip behind the bar.
+ */
+:root { --header-space: 76px; }
+@media (min-width: 640px) { :root { --header-space: 80px; } }
+@media (min-width: 1280px) { :root { --header-space: 88px; } }
+#main > :first-child:not(script),
+#main > script:first-child + * {
+  border-top: var(--header-space) solid transparent;
+  background-origin: border-box;
+}
 
 /* Scrolling program ticker. */
 .marquee { overflow: hidden; }

@@ -43,14 +43,16 @@ export function FormShell({
   compact?: boolean;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const startedRef = useRef<HTMLInputElement>(null);
+  // When the visitor started filling in the form (spam timing check). Kept in
+  // state so re-renders, such as choosing an age range, never clear it.
+  const [started, setStarted] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formError, setFormError] = useState("");
   const [pending, setPending] = useState(false);
   const [result, setResult] = useState<SubmitResult | null>(null);
 
   useEffect(() => {
-    if (startedRef.current) startedRef.current.value = String(Date.now());
+    setStarted(String(Date.now()));
   }, [result]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -130,7 +132,7 @@ export function FormShell({
             <input type="text" name="company_website" tabIndex={-1} autoComplete="off" defaultValue="" />
           </label>
         </div>
-        <input ref={startedRef} type="hidden" name="_started" defaultValue="" />
+        <input type="hidden" name="_started" value={started} readOnly />
 
         {children}
 
