@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MentorForm, PartnerForm, VolunteerForm } from "@/components/forms/PublicForms";
 import { PageHero } from "@/components/site/ui";
-import { INVOLVE_PHOTOS } from "@/lib/images";
+import { PAGE_PHOTOS } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "Get Involved",
@@ -38,7 +38,7 @@ function Pathway({ id, eyebrow, title, children, aside }: { id: string; eyebrow:
 export default function GetInvolvedPage() {
   return (
     <>
-      <PageHero image={INVOLVE_PHOTOS.partner}
+      <PageHero image={PAGE_PHOTOS.getInvolved}
         eyebrow="Get involved"
         title="There is a place for you in this movement."
         intro="Whether you want to learn, teach, give time, collaborate or fund opportunity, you can help more young people thrive in a digital world."
