@@ -27,16 +27,31 @@ export function PageHero({
   intro,
   children,
   icon,
+  image,
 }: {
   eyebrow: string;
   title: ReactNode;
   intro?: ReactNode;
   children?: ReactNode;
   icon?: IconName;
+  /** Optional photo shown beside the title (below it on phones). */
+  image?: { src: string; alt: string };
 }) {
   return (
     <section className="relative overflow-hidden border-b border-line/60 bg-[radial-gradient(70%_90%_at_0%_0%,var(--color-accent-100),transparent_65%),radial-gradient(50%_70%_at_100%_100%,#fff7e0,transparent_70%)]">
-      <div className="container-page relative py-12 sm:py-16">
+      <div className={cn("container-page relative py-12 sm:py-16", image && "grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-12")}>
+        {image ? (
+          <div className="relative order-last animate-in-scale [animation-delay:150ms]">
+            <div className="absolute -right-4 -top-4 size-28 rounded-full bg-accent/15 blur-2xl animate-blob" aria-hidden="true" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={image.src}
+              alt={image.alt}
+              fetchPriority="high"
+              className="relative aspect-[16/11] w-full rounded-3xl rounded-bl-[5rem] object-cover shadow-lift"
+            />
+          </div>
+        ) : null}
         <div className="max-w-3xl">
           {icon ? (
             <span className="icon-tile mb-5 bg-white shadow-soft">
@@ -44,7 +59,7 @@ export function PageHero({
             </span>
           ) : null}
           <p className="eyebrow-pill animate-in">{eyebrow}</p>
-          <h1 className="mt-5 animate-in text-4xl font-semibold leading-[1.08] sm:text-[3.4rem]">{title}</h1>
+          <h1 className={cn("mt-5 animate-in text-4xl font-semibold leading-[1.08] sm:text-[3.4rem]", image && "lg:text-[3rem]")}>{title}</h1>
           {intro ? <div className="lead mt-4 animate-in [animation-delay:150ms]">{intro}</div> : null}
           {children ? <div className="mt-7 animate-in [animation-delay:280ms]">{children}</div> : null}
         </div>

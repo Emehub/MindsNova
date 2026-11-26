@@ -2,6 +2,7 @@ import { CalendarDays } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EmptyState, EventCard, PageHero, SectionHeading } from "@/components/site/ui";
+import { PAGE_PHOTOS } from "@/lib/images";
 import { getPastEvents, getUpcomingEvents } from "@/lib/queries";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default async function EventsPage() {
   const [upcoming, past] = await Promise.all([getUpcomingEvents(), getPastEvents(6)]);
   return (
     <>
-      <PageHero eyebrow="Events" title="Learn, connect and get job-ready." intro="Training sessions, workshops, career talks with professionals and community events." />
+      <PageHero image={PAGE_PHOTOS.events} eyebrow="Events" title="Learn, connect and get job-ready." intro="Training sessions, workshops, career talks with professionals and community events." />
       <section className="section pt-12">
         <div className="container-page">
           <SectionHeading title="Upcoming events" />

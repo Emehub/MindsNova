@@ -2,7 +2,7 @@ import { ArrowRight, BriefcaseBusiness, CalendarDays, Compass, MessageCircleQues
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CtaBand, EmptyState, EventCard, PageHero, SectionHeading } from "@/components/site/ui";
-import { PHOTOS } from "@/lib/images";
+import { PHOTOS, PAGE_PHOTOS } from "@/lib/images";
 import { getUpcomingEvents } from "@/lib/queries";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default async function CareerTalksPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero image={PAGE_PHOTOS.careerTalks}
         eyebrow="Career Talks"
         title="Learn from people already doing the job."
         intro="We invite experienced professionals to speak with our young people about the job market, the skills employers are looking for, and how to navigate the workplace and grow a career."

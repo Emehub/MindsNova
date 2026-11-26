@@ -4,7 +4,7 @@ import Link from "next/link";
 import { LogoMark } from "@/components/Logo";
 import { CtaBand, PageHero, Paragraphs, SectionHeading, Visual } from "@/components/site/ui";
 import { SITE } from "@/lib/catalog";
-import { PHOTOS } from "@/lib/images";
+import { PHOTOS, PAGE_PHOTOS } from "@/lib/images";
 import { getSetting } from "@/lib/settings";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export default async function AboutPage() {
   const about = await getSetting("about");
   return (
     <>
-      <PageHero
+      <PageHero image={PAGE_PHOTOS.about}
         eyebrow="About us"
         title="Building an ecosystem where young minds learn, create and lead."
         intro="MindsNova Hub is a registered social enterprise based in Accra, Ghana, with an African and global outlook. We help young people build the confidence, digital skills and connections to step into the world of work."

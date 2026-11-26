@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/PublicForms";
 import { SocialLinks } from "@/components/SocialIcons";
 import { PageHero } from "@/components/site/ui";
+import { PAGE_PHOTOS } from "@/lib/images";
 import { CONTACT_CATEGORIES, SITE } from "@/lib/catalog";
 import { getSetting } from "@/lib/settings";
 
@@ -28,7 +29,7 @@ export default async function ContactPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero eyebrow="Contact us" title="We would love to hear from you." intro="Questions about programs, mentorship, volunteering, partnerships or sponsorship? Send us a message and our team will respond." />
+      <PageHero image={PAGE_PHOTOS.contact} eyebrow="Contact us" title="We would love to hear from you." intro="Questions about programs, mentorship, volunteering, partnerships or sponsorship? Send us a message and our team will respond." />
       <section className="section pt-12" data-form-scroll>
         <div className="container-page grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-12">
           <aside className="space-y-6">

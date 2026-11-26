@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ApplicationForm } from "@/components/forms/ApplicationForm";
 import { PageHero } from "@/components/site/ui";
+import { PAGE_PHOTOS } from "@/lib/images";
 import { PROGRAM_APPLICATION_STATUS, type ProgramApplicationStatus } from "@/lib/catalog";
 import { getPrograms } from "@/lib/queries";
 
@@ -23,7 +24,7 @@ export default async function ApplyPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHero
+      <PageHero image={PAGE_PHOTOS.apply}
         eyebrow="Apply / Join a Program"
         title="Take the first step."
         intro="Apply for an open program or register your interest in an upcoming intake. It takes about ten minutes, and no previous experience is needed for most programs."

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CategoryIcon } from "@/components/Icon";
 import { CtaBand, PageHero, ProgramCard } from "@/components/site/ui";
+import { PAGE_PHOTOS } from "@/lib/images";
 import { PROGRAM_CATEGORIES } from "@/lib/catalog";
 import { getPrograms } from "@/lib/queries";
 
@@ -18,7 +19,7 @@ export default async function ProgramsPage() {
 
   return (
     <>
-      <PageHero
+      <PageHero image={PAGE_PHOTOS.programs}
         eyebrow="Our programs"
         title="Practical programs for every stage of the journey."
         intro="Six simple, practical programs that help young people build confidence, learn from professionals and step into the world of work. No previous experience needed."
